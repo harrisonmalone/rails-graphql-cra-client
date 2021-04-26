@@ -15,3 +15,5 @@ A basic app for learning graphQL. No features as such are mandatory. Basic CRUD 
 <img width="765" alt="Screen Shot 2021-04-27 at 9 04 54 am" src="https://user-images.githubusercontent.com/23084767/116161728-a77da000-a737-11eb-9ca7-8408f1620bd7.png">
 
 ## Current Functionality
+
+https://user-images.githubusercontent.com/23084767/116162115-7ce01700-a738-11eb-8a5f-baa947fb6f6b.mov
