@@ -2,7 +2,7 @@
 
 ## Description
 
-A basic app for learning graphQL. No features as such are mandatory. Basic CRUD functionality is what I aim to have with perhaps user accounts and authentication.
+A basic app for learning GraphQL. No features as such are mandatory. Basic CRUD functionality is what I aim to have with perhaps user accounts and authentication.
 
 ## Questions
 
