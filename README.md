@@ -17,3 +17,11 @@ A basic app for learning GraphQL. No features as such are mandatory. Basic CRUD 
 ## Current Functionality
 
 https://user-images.githubusercontent.com/23084767/116162115-7ce01700-a738-11eb-8a5f-baa947fb6f6b.mov
+
+## Update on 30/04/2021
+
+- Struggled with understanding how to work with creating a todo and redirecting, what ended up working was removing `React.StrictMode` and then having a fetchPolicy of `network-only` to refetch the newly added data in the db
+- `StrictMode` double renders and it seemed that it was calling my graphql endpoint twice for some reason?
+- Update worked straight away which was cool, no errors or any other config needed, updating resources seems like the best feature of apollo
+- Deleting resource was also fairly simple, I run the delete mutation and then pass to it a refetchQuery
+- However for some reason after the delete the `fetchTasks` query is sent twice, not too sure why this is happening

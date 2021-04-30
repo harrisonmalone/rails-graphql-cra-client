@@ -6,23 +6,18 @@ import { REMOVE_TASK } from "./mutations";
 import { Button, Task } from "./elements";
 
 function Tasks() {
-  const { data, loading, error } = useQuery(TASKS);
-  const [removeTodo] = useMutation(REMOVE_TASK, {
-    update: (cache, { data }) => {
-      const cachedData = cache.readQuery({
-        query: TASKS,
-      });
-      cache.writeQuery({
-        query: TASKS,
-        data: {
-          fetchTasks: cachedData.fetchTasks.filter(
-            (task) => task.id !== data.deleteTask.task.id
-          ),
-        },
-      });
-    },
+  const { data, loading, error } = useQuery(TASKS, {
+    fetchPolicy: "network-only",
   });
-  
+
+  const [removeTodo] = useMutation(REMOVE_TASK, {
+    refetchQueries: [
+      {
+        query: TASKS,
+      },
+    ],
+  });
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 

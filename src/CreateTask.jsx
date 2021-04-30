@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { ADD_TASK } from "./mutations";
-import { TASKS } from "./queries";
 import { Link } from "react-router-dom";
 import { Button } from "./elements";
 
@@ -12,17 +11,6 @@ function CreateTask() {
   const history = useHistory();
 
   const [addTask] = useMutation(ADD_TASK, {
-    update: (cache, { data }) => {
-      const cachedData = cache.readQuery({
-        query: TASKS,
-      });
-      cache.writeQuery({
-        query: TASKS,
-        data: {
-          fetchTasks: [data.addTask.task, ...cachedData.fetchTasks],
-        },
-      });
-    },
     onCompleted: () => {
       history.push("/");
     },
@@ -34,7 +22,7 @@ function CreateTask() {
 
   async function onCreateFormSubmit(e) {
     e.preventDefault();
-    addTask({
+    await addTask({
       variables: {
         name: name,
         status: convertStatusToBool(),
