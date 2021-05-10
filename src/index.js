@@ -5,21 +5,20 @@ import Routes from "./Routes";
 import reportWebVitals from "./reportWebVitals";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { BrowserRouter } from "react-router-dom";
-import { typePolicies } from "./typePolicies";
 
 const client = new ApolloClient({
   uri: "http://localhost:3000/graphql",
-  cache: new InMemoryCache({
-    typePolicies,
-  }),
+  cache: new InMemoryCache(),
 });
 
 ReactDOM.render(
-  <BrowserRouter>
+  <React.StrictMode>
     <ApolloProvider client={client}>
-      <Routes />
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
     </ApolloProvider>
-  </BrowserRouter>,
+  </React.StrictMode>,
   document.getElementById("root")
 );
 

@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { useHistory } from "react-router-dom";
-import { ADD_TASK } from "./mutations";
 import { Link } from "react-router-dom";
 import { Button } from "./elements";
+import { TASKS } from "./queries";
+import { ADD_TASK } from "./mutations";
 
-function CreateTask() {
+function CreateTask({ history }) {
   const [name, setName] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("incomplete");
-  const history = useHistory();
 
   const [addTask] = useMutation(ADD_TASK, {
-    onCompleted: () => {
-      history.push("/");
-    },
+    refetchQueries: [
+      {
+        query: TASKS,
+      },
+    ],
   });
 
   function convertStatusToBool() {
@@ -28,6 +29,7 @@ function CreateTask() {
         status: convertStatusToBool(),
       },
     });
+    history.push("/");
   }
 
   return (

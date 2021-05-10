@@ -15,9 +15,9 @@ function Routes() {
   return (
     <Container>
       <Switch>
-        <Route exact path={["/", "/tasks"]} component={Tasks} />
         <Route exact path="/tasks/create" component={CreateTask} />
         <Route exact path="/tasks/:id/edit" component={EditTask} />
+        <Route exact path={["/", "/tasks"]} component={Tasks} />
       </Switch>
     </Container>
   );

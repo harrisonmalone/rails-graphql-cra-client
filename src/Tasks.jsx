@@ -1,22 +1,16 @@
 import React from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
+import { Button, Task } from "./elements";
 import { TASKS } from "./queries";
 import { REMOVE_TASK } from "./mutations";
-import { Button, Task } from "./elements";
 
 function Tasks() {
-  const { data, loading, error } = useQuery(TASKS, {
-    fetchPolicy: "network-only",
+  const { data, loading, error, refetch } = useQuery(TASKS, {
+    fetchPolicy: "no-cache",
   });
 
-  const [removeTodo] = useMutation(REMOVE_TASK, {
-    refetchQueries: [
-      {
-        query: TASKS,
-      },
-    ],
-  });
+  const [removeTodo] = useMutation(REMOVE_TASK);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
@@ -35,12 +29,13 @@ function Tasks() {
             <h3>{task.name}</h3>
             {task.status ? <p>Done ✅</p> : <p>Incomplete ❌</p>}
             <Button
-              onClick={() => {
-                removeTodo({
+              onClick={async () => {
+                await removeTodo({
                   variables: {
                     id: task.id,
                   },
                 });
+                refetch();
               }}
             >
               Delete
